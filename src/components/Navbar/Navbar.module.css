@@ -3,7 +3,14 @@
   background-color: #f5e50c;
 }
 
-.item a {
-  color: #fff;
+a {
   text-decoration: none;
+}
+
+.link {
+  color: #fff;
+}
+
+.activeLink {
+  color: rgb(98, 0, 255);
 }
