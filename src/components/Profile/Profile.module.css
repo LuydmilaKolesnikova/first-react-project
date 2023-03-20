@@ -1,0 +1,11 @@
+.profile {
+  grid-area: c;
+  background-color: #0cf5f5;
+}
+
+.bg img {
+  width: 100%;
+  height: 25vh;
+  object-fit: cover;
+  object-position: left bottom;
+}
