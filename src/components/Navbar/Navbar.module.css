@@ -1,6 +1,7 @@
 .navbar {
   grid-area: n;
   background-color: #f5e50c;
+  padding: 10px;
 }
 
 a {
