@@ -4,7 +4,7 @@
     "h h"
     "n c";
   grid-template-columns: 2fr 10fr;
-  grid-template-rows: 60px 60vh;
+  grid-template-rows: 60px;
 }
 
 .app-wrapper-content {
