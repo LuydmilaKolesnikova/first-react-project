@@ -7,6 +7,41 @@
   padding: 10px;
 }
 
+.dialogsItems img {
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+  object-position: center center;
+}
+
+.dialog {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.dialog a {
+  color: brown;
+  padding-left: 5px;
+}
 .messages {
   padding: 10px;
 }
+
+.message {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.message img {
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+  object-position: center center;
+  margin-right: 10px;
+}
+
+/* .messageAlignRight {
+  justify-content: end;
+} */
