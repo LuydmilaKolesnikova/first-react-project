@@ -1,11 +1,12 @@
 import s from "./FriendItem.module.css";
+import { NavLink } from "react-router-dom";
 
 const FriendItem = (props) => {
   return (
-    <div className={s.friendItem}>
-      <img src={props.friends.avatar}></img>
-      <div>{props.friends.name}</div>
-    </div>
+    <NavLink to={/friends/} className={s.friendItem}>
+      <img src={props.avatar}></img>
+      <div>{props.name}</div>
+    </NavLink>
   );
 };
 

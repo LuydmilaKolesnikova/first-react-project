@@ -4,7 +4,7 @@ import FriendItems from "./FriendItems/FriendItems";
 const Friends = (props) => {
   return (
     <div className={s.friends}>
-      <h3 className={s.friendTitle}>Friends</h3>
+      <h3 className={s.friendsTitle}>Friends</h3>
       <FriendItems friends={props.friends} />
     </div>
   );
