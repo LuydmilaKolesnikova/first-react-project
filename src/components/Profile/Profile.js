@@ -6,7 +6,12 @@ const Profile = (props) => {
   return (
     <div className={s.bg}>
       <ProfileInfo />
-      <Posts posts={props.posts} addPost={props.addPost} />
+      <Posts
+        posts={props.profilePage.posts}
+        newPostText={props.profilePage.newPostText}
+        addPost={props.addPost}
+        updatePostText={props.updatePostText}
+      />
     </div>
   );
 };
