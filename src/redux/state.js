@@ -1,3 +1,5 @@
+import { rerenderReactDOM } from "../render";
+
 let state = {
   sidebar: {
     friends: [
@@ -73,6 +75,7 @@ let state = {
 export const addPost = (postMessage) => {
   const newPost = { id: 3, message: postMessage, likesCount: 0 };
   state.profilePage.posts.push(newPost);
+  rerenderReactDOM(state);
 };
 
 export default state;
