@@ -1,4 +1,5 @@
-import { rerenderReactDOM } from "../render";
+//import { rerenderReactDOM } from "../render";
+let rerenderReactDOM = () => {};
 
 let state = {
   sidebar: {
@@ -122,4 +123,9 @@ export const addMessage = () => {
   rerenderReactDOM(state);
 };
 
+export const subscribe = (observer) => {
+  rerenderReactDOM = observer;
+};
+
+window.state = state;
 export default state;
