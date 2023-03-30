@@ -98,7 +98,36 @@ let store = {
     this._rerenderReactDOM = observer;
   },
 
-  updatePostText(newPostText) {
+  dispatch(action) {
+    if (action.type === "UPDATE-POST-TEXT") {
+      this._state.profilePage.newPostText = action.text;
+      this._rerenderReactDOM(this._state);
+    } else if (action.type === "ADD-POST") {
+      const newPost = {
+        id: 3,
+        message: this._state.profilePage.newPostText,
+        likesCount: 0,
+      };
+      this._state.profilePage.posts.push(newPost);
+      this._state.profilePage.newPostText = "";
+      this._rerenderReactDOM(this._state);
+    } else if (action.type === "ADD-MESSAGE") {
+      const newMessage = {
+        id: 4,
+        avatar:
+          "https://img1.goodfon.com/original/800x480/c/f5/li-feng-snow-swan-lebed.jpg",
+        message: this._state.dialogsPage.newMessageText,
+      };
+      this._state.dialogsPage.messages.push(newMessage);
+      this._state.dialogsPage.newMessageText = "";
+      this._rerenderReactDOM(this._state);
+    } else if (action.type === "UPDATE-MESSAGE-TEXT") {
+      this._state.dialogsPage.newMessageText = action.text;
+      this._rerenderReactDOM(this._state);
+    }
+  },
+
+  /*updatePostText(newPostText) {
     this._state.profilePage.newPostText = newPostText;
     this._rerenderReactDOM(this._state);
   },
@@ -129,44 +158,7 @@ let store = {
     this._state.dialogsPage.messages.push(newMessage);
     this._state.dialogsPage.newMessageText = "";
     this._rerenderReactDOM(this._state);
-  },
+  },*/
 };
-
-/* export const updatePostText = (newPostText) => {
-  store.state.profilePage.newPostText = newPostText;
-  rerenderReactDOM(store.state);
-}; 
-
-export const addPost = () => {
-  const newPost = {
-    id: 3,
-    message: store.state.profilePage.newPostText,
-    likesCount: 0,
-  };
-  store.state.profilePage.posts.push(newPost);
-  store.state.profilePage.newPostText = "";
-  rerenderReactDOM(store.state);
-};
-
-export const updateMessageText = (newMessageText) => {
-  store.state.dialogsPage.newMessageText = newMessageText;
-  rerenderReactDOM(store.state);
-};
-
-export const addMessage = () => {
-  const newMessage = {
-    id: 4,
-    avatar:
-      "https://img1.goodfon.com/original/800x480/c/f5/li-feng-snow-swan-lebed.jpg",
-    message: store.state.dialogsPage.newMessageText,
-  };
-  store.state.dialogsPage.messages.push(newMessage);
-  store.state.dialogsPage.newMessageText = "";
-  rerenderReactDOM(store.state);
-};
-
-export const subscribe = (observer) => {
-  rerenderReactDOM = observer;
-};*/
 
 export default store;
