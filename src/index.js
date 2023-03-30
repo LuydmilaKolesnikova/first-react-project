@@ -2,14 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import {
-  addPost,
-  updatePostText,
-  updateMessageText,
-  addMessage,
-  subscribe,
-} from "./redux/state";
-import state from "./redux/state";
+import store from "./redux/state";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 export let rerenderReactDOM = (state) => {
@@ -17,15 +10,15 @@ export let rerenderReactDOM = (state) => {
     <React.StrictMode>
       <App
         state={state}
-        addPost={addPost}
-        updatePostText={updatePostText}
-        updateMessageText={updateMessageText}
-        addMessage={addMessage}
+        updatePostText={store.updatePostText.bind(store)}
+        addPost={store.addPost.bind(store)}
+        updateMessageText={store.updateMessageText.bind(store)}
+        addMessage={store.addMessage.bind(store)}
       />
     </React.StrictMode>
   );
 };
 
-rerenderReactDOM(state);
+rerenderReactDOM(store.getState());
 
-subscribe(rerenderReactDOM);
+store.subscribe(rerenderReactDOM);
