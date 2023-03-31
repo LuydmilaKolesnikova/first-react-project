@@ -1,7 +1,7 @@
 const UPDATE_POST_TEXT = "UPDATE-POST-TEXT";
 const ADD_POST = "ADD-POST";
 const UPDATE_MESSAGE_TEXT = "UPDATE-MESSAGE-TEXT";
-const ADD_MESSAGE = "ADD-MESSAGE";
+const SEND_MESSAGE = "SEND-MESSAGE";
 
 let store = {
   _state: {
@@ -116,7 +116,7 @@ let store = {
       this._state.profilePage.posts.push(newPost);
       this._state.profilePage.newPostText = "";
       this._rerenderReactDOM(this._state);
-    } else if (action.type === ADD_MESSAGE) {
+    } else if (action.type === SEND_MESSAGE) {
       const newMessage = {
         id: 4,
         avatar:
@@ -153,9 +153,9 @@ export const updateMessageTextActionCreator = (text) => {
   };
 };
 
-export const addMessageActionCreator = () => {
+export const sendMessageActionCreator = () => {
   return {
-    type: ADD_MESSAGE,
+    type: SEND_MESSAGE,
   };
 };
 

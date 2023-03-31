@@ -1,7 +1,7 @@
 import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import AddNewMessage from "./addNewMessage/addNewMessage";
+import SendMessage from "./sendMessage/sendMessage";
 
 const Dialogs = (props) => {
   let dialogsElements = props.dialogsPage.dialogs.map((d) => (
@@ -16,7 +16,7 @@ const Dialogs = (props) => {
       <div className={s.dialogsItems}>{dialogsElements}</div>
       <div className={s.messages}>
         <div>{messagesElements}</div>
-        <AddNewMessage
+        <SendMessage
           newMessageText={props.dialogsPage.newMessageText}
           dispatch={props.dispatch}
         />
