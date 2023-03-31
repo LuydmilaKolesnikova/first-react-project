@@ -1,7 +1,6 @@
-const UPDATE_POST_TEXT = "UPDATE-POST-TEXT";
-const ADD_POST = "ADD-POST";
-const UPDATE_MESSAGE_TEXT = "UPDATE-MESSAGE-TEXT";
-const SEND_MESSAGE = "SEND-MESSAGE";
+import profileReducer from "./profile-reducer";
+import dialogsReducer from "./dialogs-reducer";
+import sidebarReducer from "./sidebar-reducer";
 
 let store = {
   _state: {
@@ -104,59 +103,12 @@ let store = {
   },
 
   dispatch(action) {
-    if (action.type === UPDATE_POST_TEXT) {
-      this._state.profilePage.newPostText = action.text;
-      this._rerenderReactDOM(this._state);
-    } else if (action.type === ADD_POST) {
-      const newPost = {
-        id: 3,
-        message: this._state.profilePage.newPostText,
-        likesCount: 0,
-      };
-      this._state.profilePage.posts.push(newPost);
-      this._state.profilePage.newPostText = "";
-      this._rerenderReactDOM(this._state);
-    } else if (action.type === SEND_MESSAGE) {
-      const newMessage = {
-        id: 4,
-        avatar:
-          "https://img1.goodfon.com/original/800x480/c/f5/li-feng-snow-swan-lebed.jpg",
-        message: this._state.dialogsPage.newMessageText,
-      };
-      this._state.dialogsPage.messages.push(newMessage);
-      this._state.dialogsPage.newMessageText = "";
-      this._rerenderReactDOM(this._state);
-    } else if (action.type === UPDATE_MESSAGE_TEXT) {
-      this._state.dialogsPage.newMessageText = action.text;
-      this._rerenderReactDOM(this._state);
-    }
+    profileReducer(this._state.profilePage, action);
+    dialogsReducer(this._state.dialogsPage, action);
+    sidebarReducer(this._state.sidebar, action);
+
+    this._rerenderReactDOM(this._state);
   },
-};
-
-export const updatePostTextActionCreator = (text) => {
-  return {
-    type: UPDATE_POST_TEXT,
-    text: text,
-  };
-};
-
-export const addPostActionCreator = () => {
-  return {
-    type: ADD_POST,
-  };
-};
-
-export const updateMessageTextActionCreator = (text) => {
-  return {
-    type: UPDATE_MESSAGE_TEXT,
-    text: text,
-  };
-};
-
-export const sendMessageActionCreator = () => {
-  return {
-    type: SEND_MESSAGE,
-  };
 };
 
 export default store;

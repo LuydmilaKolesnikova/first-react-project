@@ -3,7 +3,7 @@ import s from "./sendMessage.module.css";
 import {
   updateMessageTextActionCreator,
   sendMessageActionCreator,
-} from "../../../redux/state";
+} from "../../../redux/dialogs-reducer";
 
 const SendMessage = (props) => {
   const updateMessageText = (e) => {
