@@ -1,3 +1,8 @@
+const UPDATE_POST_TEXT = "UPDATE-POST-TEXT";
+const ADD_POST = "ADD-POST";
+const UPDATE_MESSAGE_TEXT = "UPDATE-MESSAGE-TEXT";
+const ADD_MESSAGE = "ADD-MESSAGE";
+
 let store = {
   _state: {
     sidebar: {
@@ -99,10 +104,10 @@ let store = {
   },
 
   dispatch(action) {
-    if (action.type === "UPDATE-POST-TEXT") {
+    if (action.type === UPDATE_POST_TEXT) {
       this._state.profilePage.newPostText = action.text;
       this._rerenderReactDOM(this._state);
-    } else if (action.type === "ADD-POST") {
+    } else if (action.type === ADD_POST) {
       const newPost = {
         id: 3,
         message: this._state.profilePage.newPostText,
@@ -111,7 +116,7 @@ let store = {
       this._state.profilePage.posts.push(newPost);
       this._state.profilePage.newPostText = "";
       this._rerenderReactDOM(this._state);
-    } else if (action.type === "ADD-MESSAGE") {
+    } else if (action.type === ADD_MESSAGE) {
       const newMessage = {
         id: 4,
         avatar:
@@ -121,44 +126,37 @@ let store = {
       this._state.dialogsPage.messages.push(newMessage);
       this._state.dialogsPage.newMessageText = "";
       this._rerenderReactDOM(this._state);
-    } else if (action.type === "UPDATE-MESSAGE-TEXT") {
+    } else if (action.type === UPDATE_MESSAGE_TEXT) {
       this._state.dialogsPage.newMessageText = action.text;
       this._rerenderReactDOM(this._state);
     }
   },
+};
 
-  /*updatePostText(newPostText) {
-    this._state.profilePage.newPostText = newPostText;
-    this._rerenderReactDOM(this._state);
-  },
+export const updatePostTextActionCreator = (text) => {
+  return {
+    type: UPDATE_POST_TEXT,
+    text: text,
+  };
+};
 
-  addPost() {
-    const newPost = {
-      id: 3,
-      message: this._state.profilePage.newPostText,
-      likesCount: 0,
-    };
-    this._state.profilePage.posts.push(newPost);
-    this._state.profilePage.newPostText = "";
-    this._rerenderReactDOM(this._state);
-  },
+export const addPostActionCreator = () => {
+  return {
+    type: ADD_POST,
+  };
+};
 
-  updateMessageText(newMessageText) {
-    this._state.dialogsPage.newMessageText = newMessageText;
-    this._rerenderReactDOM(this._state);
-  },
+export const updateMessageTextActionCreator = (text) => {
+  return {
+    type: UPDATE_MESSAGE_TEXT,
+    text: text,
+  };
+};
 
-  addMessage() {
-    const newMessage = {
-      id: 4,
-      avatar:
-        "https://img1.goodfon.com/original/800x480/c/f5/li-feng-snow-swan-lebed.jpg",
-      message: this._state.dialogsPage.newMessageText,
-    };
-    this._state.dialogsPage.messages.push(newMessage);
-    this._state.dialogsPage.newMessageText = "";
-    this._rerenderReactDOM(this._state);
-  },*/
+export const addMessageActionCreator = () => {
+  return {
+    type: ADD_MESSAGE,
+  };
 };
 
 export default store;
