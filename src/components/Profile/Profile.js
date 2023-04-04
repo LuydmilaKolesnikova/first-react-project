@@ -6,7 +6,7 @@ const Profile = (props) => {
   return (
     <div className={s.bg}>
       <ProfileInfo />
-      <PostsContainer store={props.store} />
+      <PostsContainer />
     </div>
   );
 };
