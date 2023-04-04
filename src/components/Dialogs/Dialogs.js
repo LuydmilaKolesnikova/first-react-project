@@ -1,7 +1,6 @@
 import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import SendMessage from "./sendMessage/sendMessage";
 
 const Dialogs = (props) => {
   let dialogsElements = props.dialogsPage.dialogs.map((d) => (
@@ -11,15 +10,28 @@ const Dialogs = (props) => {
     <Message messages={m} />
   ));
 
+  const updateMessageText = (e) => {
+    props.updateMessageText(e.target.value);
+  };
+
+  const sendNewMessage = () => {
+    props.sendNewMessage();
+  };
+
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsItems}>{dialogsElements}</div>
       <div className={s.messages}>
         <div>{messagesElements}</div>
-        <SendMessage
-          newMessageText={props.dialogsPage.newMessageText}
-          dispatch={props.dispatch}
-        />
+        <div className={s.addNewMessage}>
+          <textarea
+            onChange={updateMessageText}
+            value={props.dialogsPage.newMessageText}
+          ></textarea>
+          <div>
+            <button onClick={sendNewMessage}>send message</button>
+          </div>
+        </div>
       </div>
     </div>
   );
