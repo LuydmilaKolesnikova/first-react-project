@@ -73,24 +73,23 @@ let initialState = {
 const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_MESSAGE_TEXT: {
-      let stateCopy = { ...state };
-      stateCopy.newMessageText = action.text;
-
-      return stateCopy;
+      return { ...state, newMessageText: action.text };
     }
 
     case SEND_MESSAGE: {
-      const newMessage = {
-        id: 4,
-        avatar:
-          "https://img1.goodfon.com/original/800x480/c/f5/li-feng-snow-swan-lebed.jpg",
-        message: state.newMessageText,
+      return {
+        ...state,
+        newMessageText: "",
+        messages: [
+          ...state.messages,
+          {
+            id: 4,
+            avatar:
+              "https://img1.goodfon.com/original/800x480/c/f5/li-feng-snow-swan-lebed.jpg",
+            message: state.newMessageText,
+          },
+        ],
       };
-      let stateCopy = { ...state };
-      stateCopy.messages = [...state.messages];
-      stateCopy.messages.push(newMessage);
-      stateCopy.newMessageText = "";
-      return stateCopy;
     }
 
     default:
