@@ -1,5 +1,6 @@
 const FOLLOWED = "FOLLOWED";
 const UNFOLLOWED = "UNFOLLOWED";
+const SET_USERS = "SET-USERS";
 
 export const followUserActionCreator = (userId) => {
   return {
@@ -15,9 +16,16 @@ export const unfollowUserActionCreator = (userId) => {
   };
 };
 
+export const setUsersActionCreator = (users) => {
+  return {
+    type: SET_USERS,
+    users,
+  };
+};
+
 let initialState = {
   users: [
-    {
+    /* {
       id: 1,
       name: "Alina",
       avatar:
@@ -60,7 +68,7 @@ let initialState = {
       status: "I am the best",
       followed: true,
       location: { country: "Russia", city: "Vladivostok" },
-    },
+    }, */
   ],
 };
 
@@ -88,6 +96,10 @@ const usersReducer = (state = initialState, action) => {
           return u;
         }),
       };
+    }
+
+    case SET_USERS: {
+      return { ...state, users: [...action.users] };
     }
 
     default:
