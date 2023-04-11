@@ -4,13 +4,17 @@ import axios from "axios";
 import avatar_default from "../../assets/images/avatar_default.jpeg";
 
 class Users extends React.Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
     axios
       .get("https://social-network.samuraijs.com/api/1.0/users")
       .then((response) => {
+        console.log("DidMount");
         this.props.setUsers(response.data.items);
       });
+  }
+
+  componentDidUpdate() {
+    console.log("DidUpdate");
   }
 
   render() {
