@@ -6,26 +6,57 @@ import avatar_default from "../../assets/images/avatar_default.jpeg";
 class Users extends React.Component {
   componentDidMount() {
     axios
-      .get("https://social-network.samuraijs.com/api/1.0/users")
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+      )
       .then((response) => {
-        console.log("DidMount");
+        this.props.setUsers(response.data.items);
+        this.props.getTotalUsersCount(response.data.totalCount);
+      });
+  }
+
+  onPageChange(pageNumber) {
+    this.props.setCurrentPage(pageNumber);
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
+      )
+      .then((response) => {
         this.props.setUsers(response.data.items);
       });
   }
 
-  componentDidUpdate() {
-    console.log("DidUpdate");
-  }
-
   render() {
+    let pages = [];
+    for (
+      let i = 1;
+      i <= Math.ceil(this.props.totalUsersCount / 5000);
+      //i <= Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+      i++
+    ) {
+      pages.push(i);
+    }
+
     return (
       <div>
+        <div>
+          {pages.map((p) => (
+            <button
+              className={this.props.currentPage === p && s.selectedPage}
+              onClick={() => {
+                this.onPageChange(p);
+              }}
+            >
+              {p}
+            </button>
+          ))}
+        </div>
         {this.props.users.map((u) => (
           <div key={u.id} className={s.userItem}>
             <div className={s.image}>
               <img
                 className={s.avatar}
-                src={u.avatar ? u.avatar : avatar_default}
+                src={u.photos.small ? u.photos.small : avatar_default}
               />
               <div>
                 {u.followed ? (

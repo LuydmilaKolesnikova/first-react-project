@@ -1,6 +1,8 @@
 const FOLLOWED = "FOLLOWED";
 const UNFOLLOWED = "UNFOLLOWED";
 const SET_USERS = "SET-USERS";
+const GET_TOTAL_USERS_COUNT = "GET_TOTAL_USERS_COUNT";
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 export const followUserActionCreator = (userId) => {
   return {
@@ -20,6 +22,20 @@ export const setUsersActionCreator = (users) => {
   return {
     type: SET_USERS,
     users,
+  };
+};
+
+export const getTotalUsersCountActionCreator = (totalUsersCount) => {
+  return {
+    type: GET_TOTAL_USERS_COUNT,
+    totalUsersCount,
+  };
+};
+
+export const setCurrentPageActionCreator = (currentPage) => {
+  return {
+    type: SET_CURRENT_PAGE,
+    currentPage,
   };
 };
 
@@ -70,6 +86,9 @@ let initialState = {
       location: { country: "Russia", city: "Vladivostok" },
     }, */
   ],
+  totalUsersCount: 0,
+  currentPage: 1,
+  pageSize: 5,
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -100,6 +119,20 @@ const usersReducer = (state = initialState, action) => {
 
     case SET_USERS: {
       return { ...state, users: [...action.users] };
+    }
+
+    case GET_TOTAL_USERS_COUNT: {
+      return {
+        ...state,
+        totalUsersCount: action.totalUsersCount,
+      };
+    }
+
+    case SET_CURRENT_PAGE: {
+      return {
+        ...state,
+        currentPage: action.currentPage,
+      };
     }
 
     default:

@@ -54,3 +54,7 @@
 .city {
   font-weight: 600;
 }
+
+.selectedPage {
+  font-weight: bold;
+}
