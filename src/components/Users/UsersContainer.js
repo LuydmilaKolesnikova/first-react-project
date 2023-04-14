@@ -7,11 +7,13 @@ import {
   setUsersActionCreator,
   getTotalUsersCountActionCreator,
   setCurrentPageActionCreator,
+  toggleIsFetchingActionCreator,
 } from "../../redux/users-reducer";
 import { connect } from "react-redux";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
+    this.props.toggleIsFetching(true);
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
@@ -19,10 +21,12 @@ class UsersContainer extends React.Component {
       .then((response) => {
         this.props.setUsers(response.data.items);
         this.props.getTotalUsersCount(response.data.totalCount);
+        this.props.toggleIsFetching(false);
       });
   }
 
   onPageChange = (pageNumber) => {
+    this.props.toggleIsFetching(true);
     this.props.setCurrentPage(pageNumber);
     axios
       .get(
@@ -30,6 +34,7 @@ class UsersContainer extends React.Component {
       )
       .then((response) => {
         this.props.setUsers(response.data.items);
+        this.props.toggleIsFetching(false);
       });
   };
 
@@ -43,6 +48,7 @@ class UsersContainer extends React.Component {
         followUser={this.props.followUser}
         totalUsersCount={this.props.totalUsersCount}
         pageSize={this.props.pageSize}
+        isFetching={this.props.isFetching}
       />
     );
   }
@@ -53,6 +59,7 @@ const mapStateToProps = (state) => ({
   totalUsersCount: state.usersPage.totalUsersCount,
   currentPage: state.usersPage.currentPage,
   pageSize: state.usersPage.pageSize,
+  isFetching: state.usersPage.isFetching,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -63,6 +70,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(getTotalUsersCountActionCreator(totalUsersCount)),
   setCurrentPage: (pageNumber) =>
     dispatch(setCurrentPageActionCreator(pageNumber)),
+  toggleIsFetching: (isFetching) =>
+    dispatch(toggleIsFetchingActionCreator(isFetching)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);

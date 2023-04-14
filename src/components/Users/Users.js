@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./Users.module.css";
 import avatar_default from "../../assets/images/avatar_default.jpeg";
+import Preloader from "../common/Preloader/Preloader";
 
 const Users = (props) => {
   let pages = [];
@@ -15,6 +16,7 @@ const Users = (props) => {
 
   return (
     <div>
+      {props.isFetching ? <Preloader /> : null}
       <div>
         {pages.map((p) => (
           <button
