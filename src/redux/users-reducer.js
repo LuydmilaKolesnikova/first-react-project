@@ -5,42 +5,42 @@ const GET_TOTAL_USERS_COUNT = "GET_TOTAL_USERS_COUNT";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 
-export const followUserActionCreator = (userId) => {
+export const followUser = (userId) => {
   return {
     type: FOLLOWED,
     userId,
   };
 };
 
-export const unfollowUserActionCreator = (userId) => {
+export const unfollowUser = (userId) => {
   return {
     type: UNFOLLOWED,
     userId,
   };
 };
 
-export const setUsersActionCreator = (users) => {
+export const setUsers = (users) => {
   return {
     type: SET_USERS,
     users,
   };
 };
 
-export const getTotalUsersCountActionCreator = (totalUsersCount) => {
+export const getTotalUsersCount = (totalUsersCount) => {
   return {
     type: GET_TOTAL_USERS_COUNT,
     totalUsersCount,
   };
 };
 
-export const setCurrentPageActionCreator = (currentPage) => {
+export const setCurrentPage = (currentPage) => {
   return {
     type: SET_CURRENT_PAGE,
     currentPage,
   };
 };
 
-export const toggleIsFetchingActionCreator = (isFetching) => {
+export const toggleIsFetching = (isFetching) => {
   return {
     type: TOGGLE_IS_FETCHING,
     isFetching,
