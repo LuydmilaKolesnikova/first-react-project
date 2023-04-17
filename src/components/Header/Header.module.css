@@ -1,5 +1,6 @@
 .header {
   grid-area: h;
   height: 60px;
-  background-color: #1A6ACD;
+  background-color: #1a6acd;
+  color: #fff;
 }
