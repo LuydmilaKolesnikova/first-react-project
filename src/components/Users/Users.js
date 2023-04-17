@@ -20,7 +20,7 @@ const Users = (props) => {
       {props.isFetching ? <Preloader /> : null}
       <div>
         {pages.map((p) => (
-                    <button
+          <button
             className={props.currentPage === p && s.selectedPage}
             onClick={() => {
               props.onPageChange(p);
@@ -33,13 +33,11 @@ const Users = (props) => {
       {props.users.map((u) => (
         <div key={u.id} className={s.userItem}>
           <div className={s.image}>
-          <NavLink
-          to={`/profile`}>
-            {/* to={`/profile/${u.id}`}> */}
-            <img
-              className={s.avatar}
-              src={u.photos.small ? u.photos.small : avatar_default}
-            />
+            <NavLink to={`/profile/${u.id}`}>
+              <img
+                className={s.avatar}
+                src={u.photos.small ? u.photos.small : avatar_default}
+              />
             </NavLink>
             <div>
               {u.followed ? (
