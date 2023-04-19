@@ -3,7 +3,6 @@ import s from "./Users.module.css";
 import avatar_default from "../../assets/images/avatar_default.jpeg";
 import Preloader from "../common/Preloader/Preloader";
 import { NavLink } from "react-router-dom";
-import { followAPI } from "../../api/followAPI";
 
 const Users = (props) => {
   let pages = [];
@@ -46,13 +45,7 @@ const Users = (props) => {
                   disabled={props.followingProgress.some((id) => id === u.id)}
                   className={s.followBtn}
                   onClick={() => {
-                    props.toggleFollowingProgress(true, u.id);
-                    followAPI.unFollowUser(u.id).then((response) => {
-                      if (response.resultCode === 0) {
-                        props.unfollowUser(u.id);
-                        props.toggleFollowingProgress(false, u.id);
-                      }
-                    });
+                    props.follow(u.id);
                   }}
                 >
                   UNFOLLOW
@@ -62,13 +55,7 @@ const Users = (props) => {
                   disabled={props.followingProgress.some((id) => id === u.id)}
                   className={s.followBtn}
                   onClick={() => {
-                    props.toggleFollowingProgress(true, u.id);
-                    followAPI.followUser(u.id).then((response) => {
-                      if (response.resultCode === 0) {
-                        props.followUser(u.id);
-                        props.toggleFollowingProgress(false, u.id);
-                      }
-                    });
+                    props.unfollow(u.id);
                   }}
                 >
                   FOLLOW

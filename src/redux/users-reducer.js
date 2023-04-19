@@ -1,3 +1,5 @@
+import { userAPI } from "../api/userAPI";
+
 const FOLLOWED = "FOLLOWED";
 const UNFOLLOWED = "UNFOLLOWED";
 const SET_USERS = "SET-USERS";
@@ -170,6 +172,42 @@ const usersReducer = (state = initialState, action) => {
     default:
       return { ...state };
   }
+};
+
+export const getUsers = (currentPage, pageSize) => {
+  return (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    dispatch(setCurrentPage(currentPage));
+    userAPI.getUsers(currentPage, pageSize).then((response) => {
+      dispatch(setUsers(response.items));
+      dispatch(getTotalUsersCount(response.totalCount));
+      dispatch(toggleIsFetching(false));
+    });
+  };
+};
+
+export const follow = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    userAPI.unFollowUser(userId).then((response) => {
+      if (response.resultCode === 0) {
+        dispatch(unfollowUser(userId));
+        dispatch(toggleFollowingProgress(false, userId));
+      }
+    });
+  };
+};
+
+export const unfollow = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    userAPI.followUser(userId).then((response) => {
+      if (response.resultCode === 0) {
+        dispatch(followUser(userId));
+        dispatch(toggleFollowingProgress(false, userId));
+      }
+    });
+  };
 };
 
 export default usersReducer;
