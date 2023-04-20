@@ -18,6 +18,7 @@ const mapStateToProps = (state) => ({
   posts: state.profilePage.posts,
   newPostText: state.profilePage.newPostText,
   profile: state.profilePage.profile,
+  isAuth: state.authPage.isAuth,
 });
 
 function withRouter(Component) {
