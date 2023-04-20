@@ -1,21 +1,12 @@
 import React from "react";
-import axios from "axios";
 import { connect } from "react-redux";
 import Profile from "./Profile";
-import { setUserProfile } from "../../redux/profile-reducer";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { getUserProfile } from "../../redux/profile-reducer";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    let location = this.props.router.params["*"];
-    if (!location) {
-      location = 2;
-    }
-    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/profile/${location}`)
-      .then((response) => {
-        this.props.setUserProfile(response.data);
-      });
+    this.props.getUserProfile(this.props.router.params["*"]);
   }
 
   render() {
@@ -41,5 +32,5 @@ function withRouter(Component) {
 }
 
 export default connect(mapStateToProps, {
-  setUserProfile,
+  getUserProfile,
 })(withRouter(ProfileContainer));

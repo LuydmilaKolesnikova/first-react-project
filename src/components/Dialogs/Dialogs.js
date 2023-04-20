@@ -14,10 +14,6 @@ const Dialogs = (props) => {
     props.updateMessageText(e.target.value);
   };
 
-  const sendNewMessage = () => {
-    props.sendNewMessage();
-  };
-
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsItems}>{dialogsElements}</div>
@@ -29,7 +25,7 @@ const Dialogs = (props) => {
             value={props.dialogsPage.newMessageText}
           ></textarea>
           <div>
-            <button onClick={sendNewMessage}>send message</button>
+            <button onClick={props.sendMessage}>send message</button>
           </div>
         </div>
       </div>

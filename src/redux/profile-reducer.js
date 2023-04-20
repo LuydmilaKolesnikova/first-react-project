@@ -1,3 +1,5 @@
+import { profileAPI } from "../api/profileAPI";
+
 const UPDATE_POST_TEXT = "UPDATE-POST-TEXT";
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
@@ -61,6 +63,17 @@ const profileReducer = (state = initialState, action) => {
     default:
       return { ...state };
   }
+};
+
+export const getUserProfile = (location) => {
+  return (dispatch) => {
+    if (!location) {
+      location = 2;
+    }
+    profileAPI.getProfile(location).then((response) => {
+      dispatch(setUserProfile(response.data));
+    });
+  };
 };
 
 export default profileReducer;

@@ -1,23 +1,23 @@
 import { userAPI } from "../api/userAPI";
 
-const FOLLOWED = "FOLLOWED";
-const UNFOLLOWED = "UNFOLLOWED";
+const FOLLOWED_SUCCESSED = "FOLLOWED_SUCCESSED";
+const UNFOLLOWED_SUCCESSED = "UNFOLLOWED_SUCCESSED";
 const SET_USERS = "SET-USERS";
 const GET_TOTAL_USERS_COUNT = "GET_TOTAL_USERS_COUNT";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 const TOGGLE_FOLLOWING_PROGRESS = "TOGGLE_FOLLOWING_PROGRESS";
 
-export const followUser = (userId) => {
+export const followedSuccessed = (userId) => {
   return {
-    type: FOLLOWED,
+    type: FOLLOWED_SUCCESSED,
     userId,
   };
 };
 
-export const unfollowUser = (userId) => {
+export const unfollowedSuccessed = (userId) => {
   return {
-    type: UNFOLLOWED,
+    type: UNFOLLOWED_SUCCESSED,
     userId,
   };
 };
@@ -114,7 +114,7 @@ let initialState = {
 
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FOLLOWED: {
+    case FOLLOWED_SUCCESSED: {
       return {
         ...state,
         users: state.users.map((u) => {
@@ -126,7 +126,7 @@ const usersReducer = (state = initialState, action) => {
       };
     }
 
-    case UNFOLLOWED: {
+    case UNFOLLOWED_SUCCESSED: {
       return {
         ...state,
         users: state.users.map((u) => {
@@ -189,9 +189,9 @@ export const getUsers = (currentPage, pageSize) => {
 export const follow = (userId) => {
   return (dispatch) => {
     dispatch(toggleFollowingProgress(true, userId));
-    userAPI.unFollowUser(userId).then((response) => {
+    userAPI.followUser(userId).then((response) => {
       if (response.resultCode === 0) {
-        dispatch(unfollowUser(userId));
+        dispatch(followedSuccessed(userId));
         dispatch(toggleFollowingProgress(false, userId));
       }
     });
@@ -201,9 +201,10 @@ export const follow = (userId) => {
 export const unfollow = (userId) => {
   return (dispatch) => {
     dispatch(toggleFollowingProgress(true, userId));
-    userAPI.followUser(userId).then((response) => {
+    //debugger;
+    userAPI.unfollowUser(userId).then((response) => {
       if (response.resultCode === 0) {
-        dispatch(followUser(userId));
+        dispatch(unfollowedSuccessed(userId));
         dispatch(toggleFollowingProgress(false, userId));
       }
     });

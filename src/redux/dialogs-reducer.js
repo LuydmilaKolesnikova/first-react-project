@@ -1,14 +1,14 @@
 const UPDATE_MESSAGE_TEXT = "UPDATE-MESSAGE-TEXT";
 const SEND_MESSAGE = "SEND-MESSAGE";
 
-export const updateMessageTextActionCreator = (text) => {
+export const updateMessageText = (text) => {
   return {
     type: UPDATE_MESSAGE_TEXT,
     text: text,
   };
 };
 
-export const sendMessageActionCreator = () => {
+export const sendMessage = () => {
   return {
     type: SEND_MESSAGE,
   };
