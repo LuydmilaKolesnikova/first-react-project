@@ -1,8 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import Profile from "./Profile";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Navigate,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { getUserProfile } from "../../redux/profile-reducer";
+import { withAuthNavigateComponent } from "../../hoc/withAuthNavigate";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -18,8 +24,9 @@ const mapStateToProps = (state) => ({
   posts: state.profilePage.posts,
   newPostText: state.profilePage.newPostText,
   profile: state.profilePage.profile,
-  isAuth: state.authPage.isAuth,
 });
+
+let authNavigateComponent = withAuthNavigateComponent(ProfileContainer);
 
 function withRouter(Component) {
   function WithUrlDataContainerComponent(props) {
@@ -34,4 +41,4 @@ function withRouter(Component) {
 
 export default connect(mapStateToProps, {
   getUserProfile,
-})(withRouter(ProfileContainer));
+})(withRouter(authNavigateComponent));

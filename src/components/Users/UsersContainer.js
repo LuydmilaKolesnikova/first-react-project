@@ -2,6 +2,8 @@ import React from "react";
 import Users from "./Users";
 import { getUsers, follow, unfollow } from "../../redux/users-reducer";
 import { connect } from "react-redux";
+import { Navigate } from "react-router-dom";
+import { withAuthNavigateComponent } from "../../hoc/withAuthNavigate";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -41,8 +43,10 @@ const mapStateToProps = (state) => ({
   followingProgress: state.usersPage.followingProgress,
 });
 
+let authNavigateComponent = withAuthNavigateComponent(UsersContainer);
+
 export default connect(mapStateToProps, {
   getUsers,
   follow,
   unfollow,
-})(UsersContainer);
+})(authNavigateComponent);
