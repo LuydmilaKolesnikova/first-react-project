@@ -3,6 +3,7 @@ import { profileAPI } from "../api/profileAPI";
 const UPDATE_POST_TEXT = "UPDATE-POST-TEXT";
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
+const SET_USER_STATUS = "SET_USER_STATUS";
 
 export const updatePostTextActionCreator = (text) => {
   return {
@@ -24,6 +25,13 @@ export const setUserProfile = (profile) => {
   };
 };
 
+export const setUserStatus = (status) => {
+  return {
+    type: SET_USER_STATUS,
+    status,
+  };
+};
+
 let initialState = {
   posts: [
     { id: 1, message: "Hi!", likesCount: 11 },
@@ -31,7 +39,7 @@ let initialState = {
   ],
   newPostText: "",
   profile: null,
-  status: "A am cool"
+  status: "",
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -61,6 +69,14 @@ const profileReducer = (state = initialState, action) => {
         profile: action.profile,
       };
     }
+
+    case SET_USER_STATUS: {
+      return {
+        ...state,
+        status: action.status,
+      };
+    }
+
     default:
       return { ...state };
   }
@@ -69,10 +85,29 @@ const profileReducer = (state = initialState, action) => {
 export const getUserProfile = (location) => {
   return (dispatch) => {
     if (!location) {
-      location = 2;
+      location = 28795;
     }
     profileAPI.getProfile(location).then((response) => {
       dispatch(setUserProfile(response.data));
+    });
+  };
+};
+
+export const getStatus = (location) => {
+  return (dispatch) => {
+    if (!location) {
+      location = 28795;
+    }
+    profileAPI.getStatus(location).then((response) => {
+      dispatch(setUserStatus(response.data));
+    });
+  };
+};
+
+export const updateStatus = (status) => {
+  return (dispatch) => {
+    profileAPI.updateStatus(status).then((response) => {
+      dispatch(setUserStatus(status));
     });
   };
 };
