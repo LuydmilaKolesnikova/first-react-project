@@ -14,7 +14,6 @@ class ProfileContainer extends React.Component {
   componentDidMount() {
     this.props.getUserProfile(this.props.router.params["*"]);
     this.props.getStatus(this.props.router.params["*"]);
-    //this.props.updateStatus("ggggggg");
   }
 
   render() {

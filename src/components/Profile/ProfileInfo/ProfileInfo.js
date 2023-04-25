@@ -1,6 +1,7 @@
 import s from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import avatar_default from "../../../assets/images/avatar_default.jpeg";
+import ProfileStatusContainer from "../ProfileStatus/ProfileStatusContainer";
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
@@ -19,6 +20,10 @@ const ProfileInfo = (props) => {
         ) : (
           <img className={s.avatar} src={avatar_default} />
         )}
+        <ProfileStatusContainer
+          status={props.status}
+          updateStatus={props.updateStatus}
+        />
         <div>{props.profile.aboutMe}</div>
         <div>
           <p>facebook: {props.profile.contacts.facebook}</p>
