@@ -1,16 +1,9 @@
-const UPDATE_MESSAGE_TEXT = "UPDATE-MESSAGE-TEXT";
 const SEND_MESSAGE = "SEND-MESSAGE";
 
-export const updateMessageText = (text) => {
-  return {
-    type: UPDATE_MESSAGE_TEXT,
-    text: text,
-  };
-};
-
-export const sendMessage = () => {
+export const sendMessage = (text) => {
   return {
     type: SEND_MESSAGE,
+    text,
   };
 };
 
@@ -72,21 +65,16 @@ let initialState = {
 
 const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_MESSAGE_TEXT: {
-      return { ...state, newMessageText: action.text };
-    }
-
     case SEND_MESSAGE: {
       return {
         ...state,
-        newMessageText: "",
         messages: [
           ...state.messages,
           {
             id: 4,
             avatar:
               "https://img1.goodfon.com/original/800x480/c/f5/li-feng-snow-swan-lebed.jpg",
-            message: state.newMessageText,
+            message: action.text,
           },
         ],
       };
