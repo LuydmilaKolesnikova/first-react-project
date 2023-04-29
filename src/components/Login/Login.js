@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { FormControl } from "../common/FormsControls/FormsControls";
 import { required } from "../../utils/validators/validators";
 import { Navigate } from "react-router-dom";
+import s from "../common/FormsControls/FormsControls.module.css";
 
 class Login extends React.Component {
   onSubmit = (formData) => {
@@ -13,7 +14,6 @@ class Login extends React.Component {
 
   render() {
     if (this.props.isAuth) {
-      //debugger;
       return <Navigate to="/profile" />;
     }
     return (
@@ -25,13 +25,14 @@ class Login extends React.Component {
   }
 }
 
-const mapstateToProps = (state) => ({
+const mapStateToProps = (state) => ({
   isAuth: state.authPage.isAuth,
 });
 
-export const LoginContainer = connect(mapstateToProps, { login })(Login);
+export const LoginContainer = connect(mapStateToProps, { login })(Login);
 
 const LoginForm = (props) => {
+  console.log(props);
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
@@ -62,6 +63,9 @@ const LoginForm = (props) => {
         />
         Remember me
       </div>
+      {props.error && (
+        <div className={s.incorrectEmailPassword}>{props.error}</div>
+      )}
       <div>
         <button>Submit</button>
       </div>
