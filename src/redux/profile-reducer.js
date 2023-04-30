@@ -66,15 +66,12 @@ const profileReducer = (state = initialState, action) => {
     }
 
     default:
-      return { ...state };
+      return state;
   }
 };
 
 export const getUserProfile = (location) => {
   return (dispatch) => {
-    if (!location) {
-      location = 28795;
-    }
     profileAPI.getProfile(location).then((response) => {
       dispatch(setUserProfile(response.data));
     });

@@ -32,7 +32,7 @@ const mapStateToProps = (state) => ({
 export const LoginContainer = connect(mapStateToProps, { login })(Login);
 
 const LoginForm = (props) => {
-  console.log(props);
+ 
   return (
     <form onSubmit={props.handleSubmit}>
       <div>

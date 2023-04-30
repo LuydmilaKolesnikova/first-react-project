@@ -26,7 +26,7 @@ const authReducer = (state = initialState, action) => {
       };
     }
     default:
-      return { ...state };
+      return state;
   }
 };
 
@@ -34,7 +34,7 @@ export const getAuthUserData = () => {
   return (dispatch) => {
     authAPI.me().then((response) => {
       let { id, email, login } = response;
-      dispatch(setAuthUserData(id, email, login, true));
+      dispatch(setAuthUserData(id, email, login, id ? true : false));
     });
   };
 };

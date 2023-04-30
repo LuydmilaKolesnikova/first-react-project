@@ -8,6 +8,7 @@ import { compose } from "redux";
 class UsersContainer extends React.Component {
   componentDidMount() {
     this.props.getUsers(this.props.currentPage, this.props.pageSize);
+    
   }
 
   onPageChange = (pageNumber) => {
@@ -15,6 +16,7 @@ class UsersContainer extends React.Component {
   };
 
   render() {
+    
     return (
       <Users
         currentPage={this.props.currentPage}
@@ -49,5 +51,5 @@ export default compose(
     follow,
     unfollow,
   }),
-  withAuthNavigateComponent
+  //withAuthNavigateComponent
 )(UsersContainer);
