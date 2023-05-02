@@ -129,7 +129,7 @@ const usersReducer = (state = initialState, action) => {
   }
 };
 
-export const getUsers = (currentPage, pageSize) => {
+export const getAllowedUsers = (currentPage, pageSize) => {
   return (dispatch) => {
     dispatch(toggleIsFetching(true));
     dispatch(setCurrentPage(currentPage));
