@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-class ProfileStatusContainer extends React.Component {
+class ProfileStatus extends React.Component {
   state = {
     editMode: false,
     status: this.props.status,
@@ -55,4 +55,4 @@ const mapStateToProps = (state) => ({
   status: state.profilePage.status,
 });
 
-export default connect(mapStateToProps)(ProfileStatusContainer);
+export default connect(mapStateToProps)(ProfileStatus);
