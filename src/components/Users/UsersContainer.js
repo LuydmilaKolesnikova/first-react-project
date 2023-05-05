@@ -35,7 +35,6 @@ class UsersContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("mapStateToProps");
   return {
     users: getUsers(state),
     totalUsersCount: state.usersPage.totalUsersCount,
