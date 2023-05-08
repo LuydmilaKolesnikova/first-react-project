@@ -71,29 +71,26 @@ const profileReducer = (state = initialState, action) => {
 };
 
 export const getUserProfile = (location) => {
-  return (dispatch) => {
-    profileAPI.getProfile(location).then((response) => {
-      dispatch(setUserProfile(response.data));
-    });
+  return async (dispatch) => {
+    const response = await profileAPI.getProfile(location);
+    dispatch(setUserProfile(response.data));
   };
 };
 
 export const getStatus = (location) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     if (!location) {
       location = 28795;
     }
-    profileAPI.getStatus(location).then((response) => {
-      dispatch(setUserStatus(response.data));
-    });
+    const response = await profileAPI.getStatus(location);
+    dispatch(setUserStatus(response.data));
   };
 };
 
 export const updateStatus = (status) => {
-  return (dispatch) => {
-    profileAPI.updateStatus(status).then((response) => {
-      dispatch(setUserStatus(status));
-    });
+  return async (dispatch) => {
+    await profileAPI.updateStatus(status);
+    dispatch(setUserStatus(status));
   };
 };
 

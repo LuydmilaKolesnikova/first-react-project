@@ -25,12 +25,20 @@ const appReducer = (state = initialState, action) => {
   }
 };
 
-export const initialize = () => (dispatch) => {
+/* export const initialize = () => (dispatch) => {
   
     let promise = getAuthUserData();
     Promise.all([promise]).then(() => {
     dispatch(initializedSuccessed());
     });
+}; */
+
+export const initialize = () => (dispatch) => {
+  
+  let promise = getAuthUserData();
+  Promise.all([promise]).then(() => {
+  dispatch(initializedSuccessed());
+  });
 };
 
 export default appReducer;

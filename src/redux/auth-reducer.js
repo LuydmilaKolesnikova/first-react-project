@@ -31,33 +31,30 @@ const authReducer = (state = initialState, action) => {
 };
 
 export const getAuthUserData = () => {
-  return (dispatch) => {
-    authAPI.me().then((response) => {
-      let { id, email, login } = response;
-      dispatch(setAuthUserData(id, email, login, id ? true : false));
-    });
+  return async (dispatch) => {
+    const response = await authAPI.me();
+    let { id, email, login } = response;
+    dispatch(setAuthUserData(id, email, login, id ? true : false));
   };
 };
 
 export const login = (email, password, rememberMe) => {
-  return (dispatch) => {
-    authAPI.login(email, password, rememberMe).then((response) => {
-      if (response.resultCode === 0) {
-        dispatch(getAuthUserData());
-      } else {
-        dispatch(stopSubmit("login", { _error: response.messages }));
-      }
-    });
+  return async (dispatch) => {
+    const response = await authAPI.login(email, password, rememberMe);
+    if (response.resultCode === 0) {
+      dispatch(getAuthUserData());
+    } else {
+      dispatch(stopSubmit("login", { _error: response.messages }));
+    }
   };
 };
 
 export const logout = () => {
-  return (dispatch) => {
-    authAPI.logout().then((response) => {
-      if (response.resultCode === 0) {
-        dispatch(setAuthUserData(null, null, null, false));
-      }
-    });
+  return async (dispatch) => {
+    const response = await authAPI.logout();
+    if (response.resultCode === 0) {
+      dispatch(setAuthUserData(null, null, null, false));
+    }
   };
 };
 
