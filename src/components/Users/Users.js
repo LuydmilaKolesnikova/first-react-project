@@ -12,12 +12,14 @@ const Users = (props) => {
         onPageChange={props.onPageChange}
       />
       {props.isFetching ? <Preloader /> : null}
-      <UserItem
-        users={props.users}
-        followingProgress={props.followingProgress}
-        follow={props.follow}
-        unfollow={props.unfollow}
-      />
+      {props.users.map((u) => (
+        <UserItem
+          users={u}
+          followingProgress={props.followingProgress}
+          follow={props.follow}
+          unfollow={props.unfollow}
+        />
+      ))}
     </div>
   );
 };
