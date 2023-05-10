@@ -10,6 +10,8 @@ const Users = (props) => {
         totalUsersCount={props.totalUsersCount}
         currentPage={props.currentPage}
         onPageChange={props.onPageChange}
+        pageSize="5"
+        pagePortion="10"
       />
       {props.isFetching ? <Preloader /> : null}
       {props.users.map((u) => (
