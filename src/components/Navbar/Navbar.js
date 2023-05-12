@@ -10,7 +10,7 @@ const Navbar = (props) => {
           to="/profile"
           className={({ isActive }) => (isActive ? s.activeLink : s.link)}
         >
-          Profile
+          Profile2
         </NavLink>
       </div>
       <div>
