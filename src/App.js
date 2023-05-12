@@ -3,7 +3,7 @@ import "./App.css";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Navbar from "./components/Navbar/Navbar";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -23,7 +23,7 @@ class App extends React.Component {
       return <Preloader />;
     }
     return (
-      <BrowserRouter basename="/">
+      <HashRouter basename="/">
         <div className="app-wrapper">
           <HeaderContainer />
           <Navbar />
@@ -39,7 +39,7 @@ class App extends React.Component {
             </Routes>
           </div>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }
